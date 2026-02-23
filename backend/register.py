@@ -1,4 +1,4 @@
-from config import app, bot
+from config import app
 from flask import request, flash, redirect, url_for, session, render_template
 from database import db, User
 from utils import validate_email
@@ -53,10 +53,6 @@ def register():
             
             session['user_id'] = new_user.id
             flash('Registration successful!')
-            bot.send_message(chat_id=app.config['TELEGRAM_CHAT_ID'],
-                             text=(
-                                 f"User: {username} (id: {new_user.id})\nRegistred"
-                             ))
             return redirect(url_for('root'))
             
         except Exception as e:

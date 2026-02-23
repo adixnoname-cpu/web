@@ -2,7 +2,7 @@
 from config import app
 from flask import request, session, redirect, url_for, flash
 from database import db, User, Product
-from utils import save_upload, save_source, convert_youtube_to_embed
+from utils import save_upload, save_source
 
 @app.route("/profile/create-product", methods=["post"])
 def profile_create_product():
@@ -34,7 +34,6 @@ def profile_create_product():
         preview_image2 = preview_image3
         preview_image3 = "None"
 
-    video_link = convert_youtube_to_embed(request.form["video_link"])
     source = save_source(request.files.get("filename"))
 
     if not in_stock or not category or not name or not price or not description or not preview_image1 or not source:
@@ -50,7 +49,7 @@ def profile_create_product():
             in_stock=in_stock,
             description=description,
             filename=source,
-            link_to_video=video_link,
+            link_to_video="",
             image1=preview_image1,
             image2=preview_image2,
             image3=preview_image3,

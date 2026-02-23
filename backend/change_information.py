@@ -23,9 +23,6 @@ def profile_change_information():
     
     short_bio = request.form["short_bio"]
     full_bio = request.form["full_bio"]
-    discord = request.form["discord"]
-    youtube = request.form["youtube"]
-    telegram = request.form["telegram"]
 
     preview_image1 = save_upload(request.files.get("preview_image1"))
     preview_image2 = save_upload(request.files.get("preview_image2"))
@@ -34,9 +31,6 @@ def profile_change_information():
     try:
         user.short_bio = short_bio
         user.full_bio = full_bio
-        user.yt_link = youtube
-        user.ds_link = discord
-        user.tg_link = telegram
         if preview_image1 != "None":
             user.preview_image1 = preview_image1
         if preview_image2 != "None":

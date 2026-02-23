@@ -17,9 +17,6 @@ class UserModelView(ModelView):
         'admin', 
         'seller', 
         'avatar_filename', 
-        'tg_link', 
-        'ds_link', 
-        'yt_link', 
         'nowpayments_api_key', 
         'short_bio', 
         'full_bio', 
@@ -41,9 +38,6 @@ class UserModelView(ModelView):
         'admin', 
         'seller', 
         'avatar_filename', 
-        'tg_link', 
-        'ds_link', 
-        'yt_link', 
         'nowpayments_api_key', 
         'short_bio', 
         'full_bio', 
@@ -80,11 +74,11 @@ admin.add_view(OrdersModelView(Order, db.session, name='Orders'))
 
 class ProductModelView(ModelView):
 
-    column_list = ['id', 'seller_id', 'category', 'name', 'price', 'in_stock', 'description', 'filename', 'link_to_video', 'image1', 'image2', 'image3', 'pin', 'post_data']
+    column_list = ['id', 'seller_id', 'category', 'name', 'price', 'in_stock', 'description', 'filename', 'image1', 'image2', 'image3', 'pin', 'post_data']
 
     column_searchable_list = ['seller_id', 'name']
     
-    form_columns = ['seller_id', 'category', 'name', 'price', 'in_stock', 'description', 'filename', 'link_to_video', 'image1', 'image2', 'image3', 'pin']
+    form_columns = ['seller_id', 'category', 'name', 'price', 'in_stock', 'description', 'filename', 'image1', 'image2', 'image3', 'pin']
     
     def is_accessible(self):
         return session.get('admin_access')

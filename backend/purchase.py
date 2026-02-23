@@ -1,5 +1,5 @@
 
-from config import app, bot, NOWPAYMENTS_BASE_URL
+from config import app, NOWPAYMENTS_BASE_URL
 from flask import session, url_for, redirect, flash, request, jsonify
 from database import User, Product, Order, db
 import requests
@@ -77,10 +77,6 @@ def payment_callback():
         
         if not received_signature:
             logging.warning("No signature in callback headers")
-            try:
-                bot.send_message(chat_id=app.config['TELEGRAM_CHAT_ID'], text='❌ No signature in callback')
-            except:
-                pass
             return jsonify({"status": "error", "message": "Missing signature"}), 401
         
         if request.is_json:
@@ -141,21 +137,9 @@ def payment_callback():
                         db.session.add(order)
                         db.session.commit()
                         logging.info(f"Order created: user_id={user_id}, product_id={product_id}")
-                        
-                        try:
-                            bot.send_message(
-                                chat_id=app.config['TELEGRAM_CHAT_ID'], 
-                                text=f'✅ Payment verified and successful!\nSeller: { User.query.filter_by(id=seller_id).first().username } (id: { seller_id })\nBuyer: { User.query.filter_by(id=user_id).first().username } (id: { user_id })\nProduct: { Product.query.filter_by(id=product_id).first().name } (${ Product.query.filter_by(id=product_id).first().price } (id: { product_id }))'
-                            )   
-                        except Exception as bot_error:
-                            logging.error(f"Telegram bot error: {bot_error}")
             
         return jsonify({"status": "success"}), 200
         
     except Exception as e:
         logging.error(f"Callback processing error: {e}")
-        try:
-            bot.send_message(chat_id=app.config['TELEGRAM_CHAT_ID'], text=f'❌ Callback error: {str(e)}')
-        except:
-            pass
         return jsonify({"status": "error", "message": str(e)}), 500

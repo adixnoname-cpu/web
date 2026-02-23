@@ -3,6 +3,5 @@ flask-socketio
 flask-sqlalchemy
 flask-migrate
 flask-admin
-pyTelegramBotAPI
 eventlet
 gunicorn
