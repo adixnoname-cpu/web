@@ -1,5 +1,5 @@
 
-from config import app, socketio, NOWPAYMENTS_BASE_URL, bot
+from config import app, socketio, NOWPAYMENTS_BASE_URL
 from flask import session, flash, redirect, url_for, render_template, jsonify, request
 from database import User, Ticket, db, TicketMessage
 from utils import get_avatar_path
