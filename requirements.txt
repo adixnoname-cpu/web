@@ -5,3 +5,4 @@ flask-migrate
 flask-admin
 eventlet
 gunicorn
+requests
