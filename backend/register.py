@@ -8,9 +8,9 @@ def register():
 
     if request.method == 'POST':
 
-        username = request.form['username']
-        password = request.form['password']
-        email = request.form['email']
+        username = request.form.get('username')
+        password = request.form.get('password')
+        email = request.form.get('email')
         
         if not username or not password or not email:
             flash('Username, password and email are required!')

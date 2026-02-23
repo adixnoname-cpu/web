@@ -16,8 +16,8 @@ def profile_change_password():
         flash("User not found in database")
         return redirect("/login")
     
-    current_password = request.form["current_password"]
-    new_password = request.form["new_password"]
+    current_password = request.form.get("current_password")
+    new_password = request.form.get("new_password")
     if not current_password or not new_password:
         flash("Fields not found")
         return redirect("/profile/general_information")

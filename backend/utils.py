@@ -122,7 +122,11 @@ def save_upload(img) -> str:
     if img and img.filename != '':
         filename = secure_filename(img.filename)
         unique_filename = f"{os.urandom(8).hex()}_{filename}"
-        filepath = os.path.join(app.config['UPLOADS_FOLDER'], unique_filename)
+        
+        uploads_dir = os.path.join(app.static_folder, 'uploads')
+        os.makedirs(uploads_dir, exist_ok=True)
+        filepath = os.path.join(uploads_dir, unique_filename)
+        
         img.save(filepath)
         image_filename = unique_filename
     return str(image_filename)
@@ -132,7 +136,11 @@ def save_source(source) -> str:
     if source and source.filename != '':
         filename = secure_filename(source.filename)
         unique_filename = f"{os.urandom(8).hex()}_{filename}"
-        filepath = os.path.join(app.config['SOURCES_FOLDER'], unique_filename)
+        
+        sources_dir = os.path.join(app.static_folder, 'sources')
+        os.makedirs(sources_dir, exist_ok=True)
+        filepath = os.path.join(sources_dir, unique_filename)
+        
         source.save(filepath)
         image_filename = unique_filename
     return str(image_filename)

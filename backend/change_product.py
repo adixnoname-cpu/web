@@ -27,11 +27,11 @@ def profile_change_product(product_id):
             flash("Product not found in database")
             return redirect("/profile/my_products")
 
-        category = request.form["category"]
-        name = request.form["name"]
-        price = request.form["price"]
-        in_stock = request.form["in_stock"]
-        description = request.form["description"]
+        category = request.form.get("category")
+        name = request.form.get("name")
+        price = request.form.get("price")
+        in_stock = request.form.get("in_stock")
+        description = request.form.get("description")
         preview_image1 = save_upload(request.files.get("preview_image1"))
         preview_image2 = save_upload(request.files.get("preview_image2"))
         preview_image3 = save_upload(request.files.get("preview_image3"))
@@ -40,7 +40,7 @@ def profile_change_product(product_id):
             preview_image2 = preview_image3
             preview_image3 = "None"
 
-        video_link = request.form["video_link"]
+        video_link = request.form.get("video_link", "")
         source = save_source(request.files.get("filename"))
 
         try:

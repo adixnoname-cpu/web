@@ -21,11 +21,11 @@ def profile_create_product():
         flash("No access")
         return redirect("/profile/general_information")
     
-    category = request.form["category"]
-    name = request.form["name"]
-    price = request.form["price"]
-    in_stock = request.form["in_stock"]
-    description = request.form["description"]
+    category = request.form.get("category")
+    name = request.form.get("name")
+    price = request.form.get("price")
+    in_stock = request.form.get("in_stock")
+    description = request.form.get("description")
     preview_image1 = save_upload(request.files.get("preview_image1"))
     preview_image2 = save_upload(request.files.get("preview_image2"))
     preview_image3 = save_upload(request.files.get("preview_image3"))

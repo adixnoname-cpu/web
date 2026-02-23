@@ -17,7 +17,7 @@ def profile_change_email():
         flash("User not found in database")
         return redirect("/login")
     
-    email = request.form["email"]
+    email = request.form.get("email")
     if not email:
         flash("Email field not found")
         return redirect("/profile/general_information")

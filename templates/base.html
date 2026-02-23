@@ -71,7 +71,8 @@
                     <button href="/profile/general_information" class="redirect-button titlebar__profile__button">
                         <span id="username">{{ get_user(user_id).username }}</span>
                         <div class="avatar__container">
-                            <img src="{{ get_avatar_path(user_id) }}" onerror="this.style.display='none'">
+                            <img src="{{ get_avatar_path(user_id) }}"
+                                onerror="this.onerror=null; this.src='{{ url_for('static', filename='images/avatar.png') }}'">
                         </div>
                     </button>
                     {% else %}

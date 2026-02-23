@@ -16,7 +16,7 @@ def profile_change_username():
         flash("User not found in database")
         return redirect("/login")
     
-    username = request.form["username"]
+    username = request.form.get("username")
     if not username:
         flash("Username field not found")
         return redirect("/profile/general_information")

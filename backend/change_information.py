@@ -21,8 +21,8 @@ def profile_change_information():
         flash("No access")
         return redirect("/profile/information")
     
-    short_bio = request.form["short_bio"]
-    full_bio = request.form["full_bio"]
+    short_bio = request.form.get("short_bio", "")
+    full_bio = request.form.get("full_bio", "")
 
     preview_image1 = save_upload(request.files.get("preview_image1"))
     preview_image2 = save_upload(request.files.get("preview_image2"))
